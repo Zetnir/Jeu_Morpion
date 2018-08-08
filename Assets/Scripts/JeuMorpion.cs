@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,12 +27,14 @@ public class JeuMorpion : MonoBehaviour {
 	void Update () {
 		
 	}
-
+    
+    // Permet a un des joueur de placer une croix a la position indiqué
     public bool placerUneCroix(int ligne, int colonne)
     {
         return placerUnCoup(ligne, colonne, Couleurs.CROIX);
     }
 
+    // Permet a un des joueur de placer un rond a la position indiqué
     public bool placerUnRond(int ligne, int colonne)
     {
         return placerUnCoup(ligne, colonne, Couleurs.ROND);
@@ -76,11 +78,52 @@ public class JeuMorpion : MonoBehaviour {
             {
                 if(grille[i][j]!= Couleurs.VIDE)
                 {
-
+                    
                 }
             }
         }
     }
 
-    private Coul
+    private bool TrouveAlignement(Couleurs couleur, int posX, int posY)
+    {
+         int nbCouleursPareil = 0;
+         if(posX == 0)
+         {
+              for(int j = 0; j < MAX_COLONNES; j++
+              {
+                  for(int i = 0; i < MAX_LIGNES; i++)
+                  {
+                       if(grille[i][j] == couleur)
+                            nbCouleurPareil++;
+                  }
+                  if(nbCouleurPareil == 3)
+                       return true
+                  else
+                       nbCouleurPareil = 0
+              }
+    
+              for(int i = 0; i < MAX_COLONNES; i++)
+              {
+                  if(grille[i][i] == couleur)
+                      nbCouleurPareil++;
+              }
+              if(nbCouleurPareil == 3)
+                  return true
+              else
+                  nbCouleurPareil = 0
+              
+              for(int j = 0; j< MAX_LIGNES; j++)
+              {
+                  for(int i = MAX_COLONNES -1; i >= 0; i—-)
+                  {
+                      if(grille[j][i] == couleur)
+                          nbCouleurPareil++;
+                  }
+              }
+              if(nbCouleurPareil == 3)
+                  return true
+              else
+                  nbCouleurPareil = 0
+         }
+    }
 }
