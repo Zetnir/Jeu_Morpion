@@ -11,6 +11,14 @@ public class GameManager : MonoBehaviour {
         ENDGAME
     }
     private GameState gameState;
+
+    public static GameManager instance;
+
+    void Awake()
+    {
+        if (!instance)
+            instance = this;
+    }
 	// Use this for initialization
 	void Start () {
 		
@@ -20,4 +28,9 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void LancerJeu()
+    {
+
+    }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class JeuMorpion : MonoBehaviour {
 
-    private static int MAX_LIGNES = 3;
-    private static int MAX_COLONNES = 3;
+    private const int MAX_LIGNES = 3;
+    private const int MAX_COLONNES = 3;
 
     private enum Couleurs
     {
@@ -70,18 +70,19 @@ public class JeuMorpion : MonoBehaviour {
         }
     }
 
-    private Couleurs GagnantJeu()
+    private Couleurs Gagnant()
     {
         for(int i = 0; i < MAX_LIGNES; i++)
         {
             for(int j = 0; j < MAX_COLONNES; j++)
             {
-                if(grille[i][j]!= Couleurs.VIDE)
+                if(TrouveAlignement(grille[i][j],i,j))
                 {
-                    
+                    return grille[i][j];
                 }
             }
         }
+        return Couleurs.VIDE;
     }
 
     private bool TrouveAlignement(Couleurs couleur, int posX, int posY)
@@ -89,41 +90,63 @@ public class JeuMorpion : MonoBehaviour {
          int nbCouleursPareil = 0;
          if(posX == 0)
          {
-              for(int j = 0; j < MAX_COLONNES; j++
-              {
-                  for(int i = 0; i < MAX_LIGNES; i++)
-                  {
-                       if(grille[i][j] == couleur)
-                            nbCouleurPareil++;
-                  }
-                  if(nbCouleurPareil == 3)
-                       return true
-                  else
-                       nbCouleurPareil = 0
-              }
-    
-              for(int i = 0; i < MAX_COLONNES; i++)
-              {
-                  if(grille[i][i] == couleur)
-                      nbCouleurPareil++;
-              }
-              if(nbCouleurPareil == 3)
-                  return true
-              else
-                  nbCouleurPareil = 0
-              
-              for(int j = 0; j< MAX_LIGNES; j++)
-              {
-                  for(int i = MAX_COLONNES -1; i >= 0; i—-)
-                  {
-                      if(grille[j][i] == couleur)
-                          nbCouleurPareil++;
-                  }
-              }
-              if(nbCouleurPareil == 3)
-                  return true
-              else
-                  nbCouleurPareil = 0
+            // Check les 3 colonnes en partant du haut
+            for(int j= 0; j < MAX_COLONNES; j++)
+            {
+                for (int i = 0; i < MAX_LIGNES; i++)
+                {
+                    if (grille[i][j] == couleur)
+                        nbCouleursPareil++;
+                }
+                if (nbCouleursPareil == 3)
+                    return true;
+                else
+                    nbCouleursPareil = 0;
+            }
+
+            // Check la premiere diagonale en partant de la gauche
+            for(int i =0; i < MAX_COLONNES; i++)
+            {
+                if (grille[i][i] == couleur)
+                    nbCouleursPareil++;
+            }
+            if (nbCouleursPareil == 3)
+                return true;
+            else
+                nbCouleursPareil = 0;
+
+            // Check la deuxieme diagonale en partant de la droite
+            for(int j = 0; j< MAX_LIGNES; j++)
+            {
+                for(int i = MAX_COLONNES - 1; i >= 0; i--)
+                {
+                    if (grille[j][i] == couleur)
+                        nbCouleursPareil++;
+                }
+            }
+            if (nbCouleursPareil == 3)
+                return true;
+            else
+                nbCouleursPareil = 0;
          }
+
+         if(posY == 0)
+        {
+            // Check les 3 colonnes en partant du haut
+            for (int j = 0; j < MAX_LIGNES; j++)
+            {
+                for (int i = 0; i < MAX_COLONNES; i++)
+                {
+                    if (grille[j][i] == couleur)
+                        nbCouleursPareil++;
+                }
+                if (nbCouleursPareil == 3)
+                    return true;
+                else
+                    nbCouleursPareil = 0;
+            }
+        }
+
+        return false;
     }
 }

@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\JeuMorpion.cs" />
      <Compile Include="Assets\Scripts\Joueur.cs" />
+     <Compile Include="Assets\Scripts\UIManager.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Ludovic/Documents/Project Unity/Jeu_Morpion/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
